@@ -1,0 +1,733 @@
+<!doctype html>
+<html>
+    <head>
+        <title>SEOUL FAMOUS RESTAURANT</title>
+        <meta charset="utf-8">
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+            $('.mov').click(function(){  // mov 클래스가 설정된 부분을 클릭하면 href에 적은 값만큼 세로로 스크롤 시킨다.
+            var ss = $(this).attr("href");
+            $('html, body').animate({scrollTop:ss});
+            return false;
+            });
+            });
+        </script>
+        <script type="text/javascript">
+            var stmnLEFT = 20; // 오른쪽 여백 
+            var stmnGAP1 = 0; // 위쪽 여백 
+            var stmnGAP2 = 400; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
+            var stmnBASE = 400; // 스크롤 시작위치 
+            var stmnActivateSpeed = 5; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
+            var stmnScrollSpeed = 10; //스크롤 속도 (클수록 느림)
+            var stmnTimer; 
+ 
+            function RefreshStaticMenu() { 
+            var stmnStartPoint, stmnEndPoint; 
+            stmnStartPoint = parseInt(document.getElementById('SIDEMENU').style.top, 10); 
+            stmnEndPoint = Math.max(document.documentElement.scrollTop, document.body.scrollTop) + stmnGAP2; 
+            if (stmnEndPoint < stmnGAP1) stmnEndPoint = stmnGAP1; 
+            if (stmnStartPoint != stmnEndPoint) { 
+            stmnScrollAmount = Math.ceil( Math.abs( stmnEndPoint - stmnStartPoint ) / 15 ); 
+            document.getElementById('SIDEMENU').style.top = parseInt(document.getElementById('SIDEMENU').style.top, 10) + ( ( stmnEndPoint<stmnStartPoint ) ? -stmnScrollAmount : stmnScrollAmount ) + 'px'; 
+            stmnRefreshTimer = stmnScrollSpeed; 
+            }
+            stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed); 
+            } 
+            function InitializeStaticMenu() {
+            document.getElementById('SIDEMENU').style.right = stmnLEFT + 'px';
+            document.getElementById('SIDEMENU').style.top = document.body.scrollTop + stmnBASE + 'px'; 
+            RefreshStaticMenu();
+            }
+        </script>
+        
+        <style>
+            body {
+                margin: 0px;
+                background-color: #f1f4f9;
+            }
+            header {
+                position: fixed;
+                width: 100%;
+                height: 140px;
+                margin: 0px;
+                background-color: brown;
+            }
+            h1 {
+                text-align: center;
+                font-size: 60px;
+                margin: 0 auto;
+                color: white;
+            }
+            #menu {
+                text-align: center;
+            }
+            li {
+                list-style: none;
+                display: inline;
+                margin-right: 60px;
+                font-size: 21px;
+            }
+            a {
+                text-decoration: none;
+                color: black;
+                font-weight: bold;
+            }
+            a:hover {
+                color:darkgray;
+            }
+            #music {
+                float: left;
+                margin-top: 0px;
+            }
+            #wrap {
+                width: 1200px;
+                margin: 0px auto;
+                clear: both;
+                padding-top: 140px;
+            }
+            #ad {
+                margin: 20px 15px 0px 15px;
+            }
+            h2 {
+                font-size: 35px;
+            }
+            article {
+                width: 1135px;
+                height: 300px;
+                background-color: white;
+                margin: 0px 0px 20px 0px;
+                padding: 20px;
+            }
+            h3 {
+                font-size: 23px;
+                margin-top: 1px;
+                margin-bottom: 5px;
+            }
+            h4 {
+                font-size: 19px;
+                margin-top: 0px;
+                margin-bottom: 15px;
+                color:darkgray;
+            }
+            .image {
+                width: 270px;
+                height: 230px;
+                float: left;
+                margin: 0 20px 0 0;
+            }
+            section {
+                float: left;
+                margin: 0 5px 5px 0;
+                opacity: 1;
+                transition: .5s ease;
+            }
+            section:hover {
+                opacity: 0.5;
+            }
+            .text {
+                font-size: 17px;
+                font-weight: bold;
+            }
+            #SIDEMENU {
+                margin: 0px;
+                padding: 0px;
+                position: absolute;
+                clear: both;
+                right: 0px;
+                top: 0px;
+            }
+            legend {
+                text-align: center;
+            }
+            h5 {
+                font-size: 30px;
+                text-align: center;
+                margin-top: 30px;
+                margin-bottom: 5px;
+            }
+            h6 {
+                font-size: 18px;
+                text-align: center;
+                color: gray;
+                margin-top: 0px;
+            }
+        </style>
+    </head>
+    <body onload="InitializeStaticMenu();">
+        <div id=SIDEMENU>
+            <a href=0 class=mov><img src=images/sidemenu.png></a>
+        </div>
+
+        <header>
+            <div id=logo>
+                <h1 href=0 class=mov>SEOUL FAMOUS RESTAURANT</h1>
+            </div>
+            <div id=menu>
+                <ul>
+                    <li><a href=740 class=mov>강남역</a></li>
+                    <li><a href=1965 class=mov>건대입구</a></li>
+                    <li><a href=3190 class=mov>성신여대입구</a></li>
+                    <li><a href=4775 class=mov>이태원</a></li>
+                    <li><a href=6000 class=mov>홍대입구</a></li>
+                </ul>
+            </div>
+            <div id=music>
+                <audio autoplay controls loop>
+                    <source src=music/red.mp3 type="audio/mpeg">
+                        브라우저에서 오디오 파일을 지원하지 않습니다.
+                </audio>
+            </div>
+        </header>
+
+        <div id=wrap>
+            <div id=ad>
+                <img src="images/subway.png" width=1170px height=700 usemap="#subway">
+                <map name="subway">
+                    <area shape="rect" href=740 class=mov coords="737,615,783,685">
+                    <area shape="rect" href=1965 class=mov coords="908,350,1003,383">
+                    <area shape="rect" href=3190 class=mov coords="674,10,744,81">
+                    <area shape="rect" href=4775 class=mov coords="617,362,660,395">
+                    <area shape="rect" href=6000 class=mov coords="274,295,371,325">
+                </map>
+            </div>
+            <div id=main>
+            <form>
+                <fieldset>
+                    <legend>
+                        <div class=title>
+                            <h2>강남역</h2>
+                        </div>
+                    </legend>
+
+                    <article>
+                        <h3 class=subtitle>고에몬</h3>
+                        <h4 class=sub>이태리 파스타만큼 맛있는 일본식 스파게티집</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=31413936><img src=images/go1.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=31413936><img src=images/go2.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=31413936><img src=images/go4.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=31413936><img src=images/go5.png width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-534-8036
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 매일 11:30 - 22:00 (Last order 21:30, 예약불가)
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 서초구 서초대로77길 7 -> <a href=https://map.naver.com/?mapmode=0&lng=0eb2799ed6f3d99c3f31ff30cba2b610&pinId=31413936&pinType=site&lat=fab7bf95897b47e618da72ec8da0deb3&dlevel=11&enc=b64 target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=31413936&tab=menu target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=31413936&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                    <article>
+                        <h3 class=subtitle>나이쏘이</h3>
+                        <h4 class=sub>짠내투어에 나온 태국 갈비국수</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=1537200954&query=%EB%82%98%EC%9D%B4%EC%8F%98%EC%9D%B4><img src=images/na1.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=1537200954&query=%EB%82%98%EC%9D%B4%EC%8F%98%EC%9D%B4><img src=images/na3.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=1537200954&query=%EB%82%98%EC%9D%B4%EC%8F%98%EC%9D%B4><img src=images/na4.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=1537200954&query=%EB%82%98%EC%9D%B4%EC%8F%98%EC%9D%B4><img src=images/na5.png width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 070-7423-5277
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 매일 11:00 - 22:00 / 토요일 11:00 - 23:00
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 강남구 강남대로102길 11 -> <a href=https://map.naver.com/?mapmode=0&lng=6591700643f8b3acfb3874e8b2d7b9b5&pinId=1537200954&pinType=site&lat=5d030cb9ca911b52c561a8c135b35249&dlevel=11&enc=b64 target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?entry=plt&id=1537200954&query=%EB%82%98%EC%9D%B4%EC%8F%98%EC%9D%B4&tab=menu target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=1537200954&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                    <article>
+                        <h3 class=subtitle>더플라잉팬레드</h3>
+                        <h4 class=sub>맛좋고 분위기 좋은 브런치 맛집</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=30955062&query=%EB%8D%94%ED%94%8C%EB%9D%BC%EC%9E%89%ED%8C%AC%EB%A0%88%EB%93%9C><img src=images/the1.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=30955062&query=%EB%8D%94%ED%94%8C%EB%9D%BC%EC%9E%89%ED%8C%AC%EB%A0%88%EB%93%9C><img src=images/the3.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=30955062&query=%EB%8D%94%ED%94%8C%EB%9D%BC%EC%9E%89%ED%8C%AC%EB%A0%88%EB%93%9C><img src=images/the4.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=30955062&query=%EB%8D%94%ED%94%8C%EB%9D%BC%EC%9E%89%ED%8C%AC%EB%A0%88%EB%93%9C><img src=images/the5.png width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-590-2488
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 평일 10:30 - 22:00 / 토요일 10:00 - 22:00 / 일요일 10:00 - 21:00
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 서초구 서초대로 411 -> <a href=https://map.naver.com/?mapmode=0&lng=77ad28906849030c7593fb71d2110268&pinId=30955062&lat=ffd8366583a0172fffbdcb98d57331de&dlevel=11&enc=b64&pinType=site target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=30955062&tab=menu#_tab target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=30955062&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>                                
+                    </article>
+                </fieldset>
+            </form>
+
+            <br>
+
+            <form>
+                <fieldset>
+                    <legend>
+                        <div class=title>
+                            <h2>건대입구</h2>
+                        </div>
+                    </legend>
+                
+                    <article>
+                        <h3 class=subtitle>민벅</h3>
+                        <h4 class=sub>건대 파스타, 스테이크 맛집</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=35096163&query=%EB%AF%BC%EB%B2%85%20%EA%B1%B4%EB%8C%80%EC%A0%90><img src=images/min1.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=35096163&query=%EB%AF%BC%EB%B2%85%20%EA%B1%B4%EB%8C%80%EC%A0%90><img src=images/min3.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=35096163&query=%EB%AF%BC%EB%B2%85%20%EA%B1%B4%EB%8C%80%EC%A0%90><img src=images/min2.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=35096163&query=%EB%AF%BC%EB%B2%85%20%EA%B1%B4%EB%8C%80%EC%A0%90><img src=images/min4.png width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-469-4455
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 매일 11:30 - 22:00 (Last order 21:30)
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 광진구 능동로13길 39 -> <a href=https://map.naver.com/?mapmode=0&lng=1867f69fba4327fc666818fcb903709b&pinId=35096163&lat=801a15ccceffdbc1cd005ffbb490c80a&dlevel=11&enc=b64&pinType=site target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=35096163&tab=menu target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=35096163&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                    <article>
+                        <h3 class=subtitle>호야</h3>
+                        <h4 class=sub>건대 스시 맛있다고 소문자자한 호야초밥</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=32089668><img src=images/ho1.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=32089668><img src=images/ho2.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=32089668><img src=images/ho4.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=32089668><img src=images/ho5.png width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-461-3739
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 매일 11:30 - 22:00 (Last order 21:30, 예약불가)
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 광진구 능동로13길 36 -> <a href=https://map.naver.com/?mapmode=0&pinId=32089668&pinType=site&lng=cd3bdb971a03d9795e6df934d1b2817e&lat=36522d085cae82f950c7b6471cdfb5cd&dlevel=11&enc=b64 target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=32089668&query=%ED%98%B8%EC%95%BC%EC%B4%88%EB%B0%A5%EC%B0%B8%EC%B9%98%20%EB%B3%B8%EC%A0%90&tab=menu target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=32089668&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                    <article>
+                        <h3 class=subtitle>도쿄스테이크</h3>
+                        <h4 class=sub>스테이크 저녁한끼로 괜찮은 곳</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=36321359><img src=images/steak1.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=36321359></a><img src=images/steak2.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=36321359></a><img src=images/steak3.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=36321359></a><img src=images/steak5.png width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-498-6975
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 매일 11:00 - 21:00
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 광진구 능동로13길 27 -> <a href=https://map.naver.com/?mapmode=0&lng=cd84afe8138d0e5aa4a9e7adc3f82df7&pinId=36321359&lat=da3b829574323105a41fbea3703a9e47&dlevel=11&enc=b64&pinType=site target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=36321359&tab=menu target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=36321359&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                </fieldset>
+            </form>
+
+            <br>
+
+            <form>
+                <fieldset>
+                    <legend>
+                        <div class=title>
+                            <h2>성신여대입구</h2>
+                        </div>
+                    </legend>
+
+                    <article>
+                        <h3 class=subtitle>윤휘식당</h3>
+                        <h4 class=sub>일본식 정식 함박스테끼가 맛있는 성신여대 맛집</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=37090281&query=%EC%9C%A4%ED%9C%98%EC%8B%9D%EB%8B%B9><img src=images/youn1.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=37090281&query=%EC%9C%A4%ED%9C%98%EC%8B%9D%EB%8B%B9><img src=images/youn3.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=37090281&query=%EC%9C%A4%ED%9C%98%EC%8B%9D%EB%8B%B9><img src=images/youn4.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=37090281&query=%EC%9C%A4%ED%9C%98%EC%8B%9D%EB%8B%B9><img src=images/youn5.png width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-922-0851
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 매일 11:30 - 21:30 (점심주문마감 15:30 / 재료준비시간 16:30 - 17:30 / 저녁주문마감 20:45 )
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 성북구 보문로34길 70 -> <a href=https://map.naver.com/?mapmode=0&lng=469fcdbf1ecd184f88d9f295b7c19d32&pinId=37090281&pinType=site&lat=bf5f3e67b16649fd44940a318309ad0f&dlevel=11&enc=b64 target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=37090281&tab=menu#_tab target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=37090281&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                    <article>
+                        <h3 class=subtitle>가야가야</h3>
+                        <h4 class=sub>성신여대 백종원의 골목식당에 나온 일본라멘 맛집</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=1731314833><img src=images/gaya1.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=1731314833><img src=images/gaya3.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=1731314833><img src=images/gaya4.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=1731314833><img src=images/gaya5.png width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-929-7877
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 매일 11:00 - 21:00 (명절당일휴무)
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 성북구 동소문로22길 57-10 -> <a href=https://map.naver.com/?mapmode=0&lng=66e6e4a8e96f57eae4b345a07984f985&pinId=1731314833&pinType=site&lat=ae80aeed269a771b8020926d5d1b724c&dlevel=11&enc=b64 target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=1731314833&tab=menu#_tab target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=1731314833&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                    <article>
+                        <h3 class=subtitle>밀거래</h3>
+                        <h4 class=sub>돈부리와 짬뽕이 맛있는 곳 성신여대 맛집</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=43018142&query=%EB%B0%80%EA%B1%B0%EB%9E%98><img src=images/meal1.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=43018142&query=%EB%B0%80%EA%B1%B0%EB%9E%98><img src=images/meal3.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=43018142&query=%EB%B0%80%EA%B1%B0%EB%9E%98><img src=images/meal4.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=43018142&query=%EB%B0%80%EA%B1%B0%EB%9E%98><img src=images/meal5.jpg width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-929-0110
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 매일 11:30 - 21:30 (Break time 15:00 - 17:00 / Last order 21:00)
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 성북구 동소문로22길 57-6 -> <a href=https://map.naver.com/?mapmode=0&lng=43e206f458aa3f076458739abb523a90&pinId=43018142&lat=ace4421aaf69e9d734bdb1a3f67fcea8&dlevel=11&enc=b64&pinType=site target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=43018142&tab=menu#_tab target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=43018142&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                    <article>
+                        <h3 class=subtitle>뚜레곱창</h3>
+                        <h4 class=sub>곱창이 맛있는 뚜레곱창</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36304964&query=%EB%9A%9C%EB%A0%88%EA%B3%B1%EC%B0%BD><img src=images/tto1.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36304964&query=%EB%9A%9C%EB%A0%88%EA%B3%B1%EC%B0%BD><img src=images/tto2.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36304964&query=%EB%9A%9C%EB%A0%88%EA%B3%B1%EC%B0%BD><img src=images/tto4.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36304964&query=%EB%9A%9C%EB%A0%88%EA%B3%B1%EC%B0%BD><img src=images/tto5.jpg width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-922-5580
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 매일 16:30 - 23:00 (재료 조기 소진시 22:30 마감)
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 성북구 동소문로20길 28-4 -> <a href=https://map.naver.com/?mapmode=0&lng=c34a90c72d2196df496be85b452cd86f&pinId=36304964&pinType=site&lat=691d163f58a2704648746c533d9bbd1e&dlevel=11&enc=b64 target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36304964&query=%EB%9A%9C%EB%A0%88%EA%B3%B1%EC%B0%BD&tab=menu target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=36304964&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                </fieldset>
+            </form>
+
+            <br>
+
+            <form>
+                <fieldset>
+                    <legend>
+                        <div class=title>
+                            <h2>이태원</h2>
+                        </div>
+                    </legend>
+
+                    <article>
+                        <h3 class=subtitle>모나리자</h3>
+                        <h4 class=sub>맥주한잔에 맛난 만조피자</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=36513586><img src=images/mo1.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=36513586><img src=images/mo3.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=36513586><img src=images/mo4.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?id=36513586><img src=images/mo5.jpg width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-6228-0062
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 매일 12:00 - 03:30 (연중무휴)
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 용산구 이태원로27가길 46 -> <a href=https://map.naver.com/?mapmode=0&lng=03f5292e9a4b8bd07a3b82a6b64b9633&pinId=36513586&lat=09edef99dd1c37c49267f54b69bb895b&dlevel=11&enc=b64&pinType=site target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=36513586 target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=36513586&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                    <article>
+                        <h3 class=subtitle>트로이카</h3>
+                        <h4 class=sub>이태원 경리단길을 지나 러시아음식(패밀리레스토랑)</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36728206&query=%ED%8A%B8%EB%A1%9C%EC%9D%B4%EC%B9%B4><img src=images/troika1.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36728206&query=%ED%8A%B8%EB%A1%9C%EC%9D%B4%EC%B9%B4><img src=images/troika2.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36728206&query=%ED%8A%B8%EB%A1%9C%EC%9D%B4%EC%B9%B4><img src=images/troika3.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36728206&query=%ED%8A%B8%EB%A1%9C%EC%9D%B4%EC%B9%B4><img src=images/troika5.png width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-797-7724
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 일요일 ~ 목요일 12:00 - 03:00 / 금요일 12:00 - 23:00 / 토요일 12:00 - 04:00
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 용산구 이태원로 164-1 -> <a href=https://map.naver.com/?mapmode=0&lng=97c8f11bd8791e617ab144a86966afe5&pinId=36728206&pinType=site&lat=bdefb2e2a943eef96d848c9deb815110&dlevel=11&enc=b64 target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=36728206&tab=menu#_tab target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=36728206&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                    <article>
+                        <h3 class=subtitle>어반스테이크 앤 펍</h3>
+                        <h4 class=sub>이태원 파스타 맛집 으로 유명한 어반스테이크</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=35317465&query=%EC%96%B4%EB%B0%98%EC%8A%A4%ED%85%8C%EC%9D%B4%ED%81%AC%20%EC%95%A4%20%ED%8E%8D><img src=images/urban1.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=35317465&query=%EC%96%B4%EB%B0%98%EC%8A%A4%ED%85%8C%EC%9D%B4%ED%81%AC%20%EC%95%A4%20%ED%8E%8D><img src=images/urban3.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=35317465&query=%EC%96%B4%EB%B0%98%EC%8A%A4%ED%85%8C%EC%9D%B4%ED%81%AC%20%EC%95%A4%20%ED%8E%8D><img src=images/urban4.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=35317465&query=%EC%96%B4%EB%B0%98%EC%8A%A4%ED%85%8C%EC%9D%B4%ED%81%AC%20%EC%95%A4%20%ED%8E%8D><img src=images/urban5.png width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 010-2779-8220
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 주말 12:30 - 22:30 / 평일 16:00 - 22:00 (월요일 휴무)
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 용산구 이태원로19길 6-10 -> <a href=https://map.naver.com/?mapmode=0&lng=0a6d17458487b20b26ae09cdaea91e32&pinId=35317465&pinType=site&lat=56deac510cc6519de503ecf6e07f5715&dlevel=11&enc=b64 target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=35317465&tab=menu#_tab target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=35317465&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                </fieldset>
+            </form>
+
+            <br>
+
+            <form>
+                <fieldset>
+                    <legend>
+                        <div class=title>
+                            <h2>홍대입구</h2>
+                        </div>
+                    </legend>
+
+                    <article>
+                        <h3 class=subtitle>윤씨밀방</h3>
+                        <h4 class=sub>함박스테이크와 투움바파스타가 맛있는 곳</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=13341197&query=%EC%9C%A4%EC%94%A8%EB%B0%80%EB%B0%A9><img src=images/mb1.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=13341197&query=%EC%9C%A4%EC%94%A8%EB%B0%80%EB%B0%A9><img src=images/mb3.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=13341197&query=%EC%9C%A4%EC%94%A8%EB%B0%80%EB%B0%A9><img src=images/mb4.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=13341197&query=%EC%9C%A4%EC%94%A8%EB%B0%80%EB%B0%A9><img src=images/mb5.png width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-3143-4116
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 매일 11:00 - 22:00 (Break Time 15:00 - 16:00 / Last order 20:30 / 월요일 휴무)
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 마포구 와우산로15길 15 -> <a href=https://map.naver.com/?mapmode=0&lng=9177f35cbf32e5eb1a0a91746180d20e&pinId=13341197&lat=545953ba041c578bc20ccfecde080e0c&dlevel=11&enc=b64&pinType=site target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?entry=plt&id=13341197&query=%EC%9C%A4%EC%94%A8%EB%B0%80%EB%B0%A9&tab=menu target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=13341197&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                    <article>
+                        <h3 class=subtitle>사모님돈가스</h3>
+                        <h4 class=sub>기다림이 필요한 수요미식회 맛집</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=20069699&query=%EC%82%AC%EB%AA%A8%EB%8B%98%EB%8F%88%EA%B0%80%EC%8A%A4><img src=images/don1.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=20069699&query=%EC%82%AC%EB%AA%A8%EB%8B%98%EB%8F%88%EA%B0%80%EC%8A%A4><img src=images/don3.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=20069699&query=%EC%82%AC%EB%AA%A8%EB%8B%98%EB%8F%88%EA%B0%80%EC%8A%A4><img src=images/don4.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=20069699&query=%EC%82%AC%EB%AA%A8%EB%8B%98%EB%8F%88%EA%B0%80%EC%8A%A4><img src=images/don5.png width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-337-2207
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 평일 12:00 - 20:00 (Break time 14:00 - 17:00 / 일요일 휴무)
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 마포구 와우산로 39-13 -> <a href=https://map.naver.com/?mapmode=0&lng=dbb165fb1c2d3711ab6fb4e625bc3ff6&pinId=20069699&lat=17eab8fb84be24c9357a0d3b303de0dd&dlevel=11&enc=b64&pinType=site target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=20069699&tab=menu#_tab target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=20069699&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                    <article>
+                        <h3 class=subtitle>메이드바이오즈</h3>
+                        <h4 class=sub>홍대 매운오징어 치즈쌈</h4>
+                            <div class=image>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36547222&query=%EB%A9%94%EC%9D%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%98%A4%EC%A6%88><img src=images/oz1.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36547222&query=%EB%A9%94%EC%9D%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%98%A4%EC%A6%88><img src=images/oz3.jpg width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36547222&query=%EB%A9%94%EC%9D%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%98%A4%EC%A6%88><img src=images/oz4.png width=130 height=105></a>
+                                </section>
+                                <section>
+                                    <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36547222&query=%EB%A9%94%EC%9D%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%98%A4%EC%A6%88><img src=images/oz5.png width=130 height=105></a>
+                                </section>
+                            </div>
+                            <div class=text>
+                                <img src=images/call.png width=18px height=18px> 02-3144-3922
+                                <br><br>
+                                <img src=images/open.png width=18px height=18px> 매일 11:00 - 22:30 (Last order 21:50)
+                                <br><br>
+                                <img src=images/place.png width=18px height=18px> 서울 마포구 와우산로21길 14 -> <a href=https://map.naver.com/?mapmode=0&lng=77aaaa13eb5a742c5b5d65c68d53573b&pinId=36547222&pinType=site&lat=67ca940d81787f60b3e6bdaba1448072&dlevel=11&enc=b64 target=_blank>지도보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?entry=plt&id=36547222&query=%EB%A9%94%EC%9D%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%98%A4%EC%A6%88&tab=menu target=_blank><img src=images/menu.png width=18px height=18px> 메뉴보기</a>
+                                <br><br>
+                                <a href=https://store.naver.com/restaurants/detail?id=36547222&tab=fsasReview#_tab target=_blank><img src=images/review.png width=18px height=18px> 리뷰보기</a>
+                            </div>
+                    </article>
+                </fieldset>
+            </form>
+            </div>
+        </div>
+
+        <br>
+        <hr>
+
+        <footer>
+            <h5>made by YuJin</h5>
+            <h6>yjjon08@naver.com</h6>
+        </footer>
+    </body>
+</html>
